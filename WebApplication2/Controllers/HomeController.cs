@@ -12,11 +12,15 @@ namespace WebApplication2.Controllers
     {
         ClientesController bd = new ClientesController();
         //para la paginacion se requiere a Negocios2017Entities
-        Negocios2017Entities1 negocios = new Negocios2017Entities1();
+        //Negocios2017Entities1 negocios = new Negocios2017Entities1();
+        /*Páginacion*/
+        int paginacion = 10;
         public ActionResult Index(int? pag = null)
         {
             //recupero la cantidad de registro y almaceno el numero de registro
-            int cliente = negocios.tb_clientes.Count();
+            //int cliente = negocios.tb_clientes.Count();
+
+            int cliente = bd.Get().Count();
             ViewBag.paginacion = cliente % paginacion != 0 ? cliente / paginacion + 1 : cliente / paginacion;
 
             //definimos la paginacion actual y el registro de inicio y registro final
@@ -27,16 +31,17 @@ namespace WebApplication2.Controllers
 
             //variable que almacenara los clientes para la paginacion
 
-            List<tb_clientes> listaPag = new List<tb_clientes>();
+            /*List<tb_clientes> listaPag = new List<tb_clientes>();*/
+
+            List<USP_LISTAR_CLIENTES_Result> listaPag = new List<USP_LISTAR_CLIENTES_Result>();
             for (int i = registroInicial; i < registroFinal; i++)
             {
                 if (i == cliente) break; // si i es igual a numero de registro saldra
-                listaPag.Add(negocios.tb_clientes.ToList()[i]);
+                listaPag.Add(bd.Get().ToList()[i]);
             }
-            return View(listaPag);
-
-
             //return View(bd.Get());
+
+            return View(listaPag);
         }
 
         public ActionResult Create()
@@ -78,30 +83,8 @@ namespace WebApplication2.Controllers
             bd.Delete(id);
             return RedirectToAction("Index");
         }
-        /*Páginacion*/
-        int paginacion = 10;
+        
 
-        public ActionResult ListadoClientePaginacion(int? pag = null)
-        {
-            //recupero la cantidad de registro y almaceno el numero de registro
-            int cliente = negocios.tb_clientes.Count();
-            ViewBag.paginacion = cliente % paginacion!= 0 ? cliente / paginacion + 1 : cliente / paginacion;
-
-            //definimos la paginacion actual y el registro de inicio y registro final
-
-            int pagPrincipal = pag == null ? 0 : (int)pag;
-            int registroInicial = pagPrincipal * paginacion;
-            int registroFinal = registroInicial + paginacion;
-
-            //variable que almacenara los clientes para la paginacion
-
-            List<tb_clientes> listaPag = new List<tb_clientes>();
-            for (int i = registroInicial; i < registroFinal; i++)
-            {
-                if (i == cliente) break; // si i es igual a numero de registro saldra
-                listaPag.Add(negocios.tb_clientes.ToList()[i]);
-            }
-            return View(listaPag);
-        }
+       
     }
 }

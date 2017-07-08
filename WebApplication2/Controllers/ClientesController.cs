@@ -14,17 +14,17 @@ namespace WebApplication2.Controllers
         Negocios2017Entities1 bd = new Negocios2017Entities1();
 
         // GET: listado para clientes
-        public IEnumerable<tb_clientes> Get()
+        public IEnumerable<USP_LISTAR_CLIENTES_Result> Get()
         {
-
-
             //return bd.Database.SqlQuery<tb_clientes>("USP_LISTAR_CLIENTES");
-            return bd.tb_clientes.ToList();
+            //return bd.tb_clientes.ToList();
+            return bd.USP_LISTAR_CLIENTES();
         }
 
-        public IEnumerable<tb_paises> GetPaises()
+        public IEnumerable<USP_LISTAR_PAIS_Result> GetPaises()
         {
-            return bd.tb_paises.ToList();
+            //return bd.tb_paises.ToList();
+            return bd.USP_LISTAR_PAIS();
         }
 
         // GET: obtener un cliente mediante su id
@@ -38,7 +38,7 @@ namespace WebApplication2.Controllers
         {
             try
             {
-                tb_clientes obj = new tb_clientes();
+                /*tb_clientes obj = new tb_clientes();
                 obj.IdCliente = reg.IdCliente;
                 obj.NombreCia = reg.NombreCia;
                 obj.Direccion = reg.Direccion;
@@ -46,7 +46,11 @@ namespace WebApplication2.Controllers
                 obj.Telefono  = reg.Telefono;
                 //agrego los objetos ala tabla clientes
                 bd.tb_clientes.Add(obj);
+                bd.SaveChanges();*/
+
+                bd.USP_CREAR_CLIENTES(reg.IdCliente,reg.NombreCia,reg.Direccion,reg.idpais,reg.Telefono);
                 bd.SaveChanges();
+
             }
             catch(Exception e)
             {
@@ -59,9 +63,13 @@ namespace WebApplication2.Controllers
         {
             try
             {
+                /*
                 //capturo el stado
                 bd.Entry(reg).State = System.Data.EntityState.Modified;
                 //guardo los cambios
+                bd.SaveChanges();*/
+
+                bd.USP_ACTUALIZAR_CLIENTES(reg.IdCliente, reg.NombreCia, reg.Direccion, reg.idpais, reg.Telefono);
                 bd.SaveChanges();
             }
             catch (Exception)
@@ -73,8 +81,11 @@ namespace WebApplication2.Controllers
         // DELETE: eliminar un registro de tb_clientes
         public void Delete(string id)
         {
-            tb_clientes obj = Get(id);
+            /*tb_clientes obj = Get(id);
             bd.tb_clientes.Remove(obj);
+            bd.SaveChanges();*/
+
+            bd.USP_ELIMINAR_CLIENTES(id);
             bd.SaveChanges();
         }
 

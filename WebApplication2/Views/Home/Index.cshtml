@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication2.Models.tb_clientes>
+﻿@model IEnumerable<WebApplication2.Models.USP_LISTAR_CLIENTES_Result>
 
 @{
     ViewBag.Title = "Index";
@@ -21,7 +21,7 @@
             @Html.DisplayNameFor(model => model.Direccion)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.idpais)
+            @Html.DisplayNameFor(model => model.NombrePais)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Telefono)
@@ -41,26 +41,25 @@
             @Html.DisplayFor(modelItem => item.Direccion)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.idpais)
+            @Html.DisplayFor(modelItem => item.NombrePais)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Telefono)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new {  id=item.IdCliente  }) |
+            @Html.ActionLink("Edit", "Edit", new {  id=item.IdCliente }) |
             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new {  id=item.IdCliente })
+            @Html.ActionLink("Delete", "Delete", new { id = item.IdCliente })
         </td>
     </tr>
 }
 
 </table>
-
 <!--Aqui pondremos la paginacion-->
 <div>
     @for (int i = 0; i < (int)ViewBag.paginacion; i++)
     {
-        @Html.ActionLink((i + 1).ToString(), "ListadoClientePaginacion", new { pag = i }, new { @class = "btn btn-primary" })
+        @Html.ActionLink((i + 1).ToString(), "Index", new { pag = i }, new { @class = "btn btn-primary" })
     }
 
 </div>
