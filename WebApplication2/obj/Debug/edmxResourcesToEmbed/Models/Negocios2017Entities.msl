@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Negocios2017ModelStoreContainer" CdmEntityContainer="Negocios2017Entities1">
+    <EntitySetMapping Name="tb_clientes">
+      <EntityTypeMapping TypeName="Negocios2017Model.tb_clientes">
+        <MappingFragment StoreEntitySet="tb_clientes">
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="NombreCia" ColumnName="NombreCia" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="idpais" ColumnName="idpais" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_paises">
+      <EntityTypeMapping TypeName="Negocios2017Model.tb_paises">
+        <MappingFragment StoreEntitySet="tb_paises">
+          <ScalarProperty Name="Idpais" ColumnName="Idpais" />
+          <ScalarProperty Name="NombrePais" ColumnName="NombrePais" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="USP_ACTUALIZAR_CLIENTES" FunctionName="Negocios2017Model.Store.USP_ACTUALIZAR_CLIENTES" />
+    <FunctionImportMapping FunctionImportName="USP_CREAR_CLIENTES" FunctionName="Negocios2017Model.Store.USP_CREAR_CLIENTES" />
+    <FunctionImportMapping FunctionImportName="USP_ELIMINAR_CLIENTES" FunctionName="Negocios2017Model.Store.USP_ELIMINAR_CLIENTES" />
+    <FunctionImportMapping FunctionImportName="USP_LISTAR_CLIENTES" FunctionName="Negocios2017Model.Store.USP_LISTAR_CLIENTES">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Negocios2017Model.USP_LISTAR_CLIENTES_Result">
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="NombreCia" ColumnName="NombreCia" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="NombrePais" ColumnName="NombrePais" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="USP_LISTAR_PAIS" FunctionName="Negocios2017Model.Store.USP_LISTAR_PAIS">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Negocios2017Model.USP_LISTAR_PAIS_Result">
+          <ScalarProperty Name="Idpais" ColumnName="Idpais" />
+          <ScalarProperty Name="NombrePais" ColumnName="NombrePais" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

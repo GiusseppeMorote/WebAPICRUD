@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Negocios2017Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_clientes">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="NombreCia" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="idpais" Type="char" MaxLength="3" />
+          <Property Name="Telefono" Type="varchar" MaxLength="24" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_paises">
+          <Key>
+            <PropertyRef Name="Idpais" />
+          </Key>
+          <Property Name="Idpais" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="NombrePais" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tb_client__idpai__145C0A3F">
+          <End Role="tb_paises" Type="Self.tb_paises" Multiplicity="0..1" />
+          <End Role="tb_clientes" Type="Self.tb_clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_paises">
+              <PropertyRef Name="Idpais" />
+            </Principal>
+            <Dependent Role="tb_clientes">
+              <PropertyRef Name="idpais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="USP_ACTUALIZAR_CLIENTES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="varchar" Mode="In" />
+          <Parameter Name="NOM" Type="varchar" Mode="In" />
+          <Parameter Name="DIR" Type="varchar" Mode="In" />
+          <Parameter Name="IDP" Type="char" Mode="In" />
+          <Parameter Name="TEL" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="USP_CREAR_CLIENTES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="varchar" Mode="In" />
+          <Parameter Name="NOM" Type="varchar" Mode="In" />
+          <Parameter Name="DIR" Type="varchar" Mode="In" />
+          <Parameter Name="IDP" Type="char" Mode="In" />
+          <Parameter Name="TEL" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="USP_ELIMINAR_CLIENTES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="USP_LISTAR_CLIENTES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_LISTAR_PAIS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Negocios2017ModelStoreContainer">
+          <EntitySet Name="tb_clientes" EntityType="Self.tb_clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_paises" EntityType="Self.tb_paises" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tb_client__idpai__145C0A3F" Association="Self.FK__tb_client__idpai__145C0A3F">
+            <End Role="tb_paises" EntitySet="tb_paises" />
+            <End Role="tb_clientes" EntitySet="tb_clientes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Negocios2017Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_clientes">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreCia" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idpais" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="24" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_paises" Relationship="Self.FK__tb_client__idpai__145C0A3F" FromRole="tb_clientes" ToRole="tb_paises" />
+        </EntityType>
+        <EntityType Name="tb_paises">
+          <Key>
+            <PropertyRef Name="Idpais" />
+          </Key>
+          <Property Name="Idpais" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NombrePais" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_clientes" Relationship="Self.FK__tb_client__idpai__145C0A3F" FromRole="tb_paises" ToRole="tb_clientes" />
+        </EntityType>
+        <Association Name="FK__tb_client__idpai__145C0A3F">
+          <End Role="tb_paises" Type="Self.tb_paises" Multiplicity="0..1" />
+          <End Role="tb_clientes" Type="Self.tb_clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_paises">
+              <PropertyRef Name="Idpais" />
+            </Principal>
+            <Dependent Role="tb_clientes">
+              <PropertyRef Name="idpais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Negocios2017Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_clientes" EntityType="Self.tb_clientes" />
+          <EntitySet Name="tb_paises" EntityType="Self.tb_paises" />
+          <AssociationSet Name="FK__tb_client__idpai__145C0A3F" Association="Self.FK__tb_client__idpai__145C0A3F">
+            <End Role="tb_paises" EntitySet="tb_paises" />
+            <End Role="tb_clientes" EntitySet="tb_clientes" />
+          </AssociationSet>
+          <FunctionImport Name="USP_ACTUALIZAR_CLIENTES">
+            <Parameter Name="ID" Mode="In" Type="String" />
+            <Parameter Name="NOM" Mode="In" Type="String" />
+            <Parameter Name="DIR" Mode="In" Type="String" />
+            <Parameter Name="IDP" Mode="In" Type="String" />
+            <Parameter Name="TEL" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_CREAR_CLIENTES">
+            <Parameter Name="ID" Mode="In" Type="String" />
+            <Parameter Name="NOM" Mode="In" Type="String" />
+            <Parameter Name="DIR" Mode="In" Type="String" />
+            <Parameter Name="IDP" Mode="In" Type="String" />
+            <Parameter Name="TEL" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_ELIMINAR_CLIENTES">
+            <Parameter Name="ID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_LISTAR_CLIENTES" ReturnType="Collection(Negocios2017Model.USP_LISTAR_CLIENTES_Result)" />
+          <FunctionImport Name="USP_LISTAR_PAIS" ReturnType="Collection(Negocios2017Model.USP_LISTAR_PAIS_Result)" />
+        </EntityContainer>
+        <ComplexType Name="USP_LISTAR_CLIENTES_Result">
+          <Property Type="String" Name="IdCliente" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="NombreCia" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="NombrePais" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="Telefono" Nullable="false" MaxLength="24" />
+        </ComplexType>
+        <ComplexType Name="USP_LISTAR_PAIS_Result">
+          <Property Type="String" Name="Idpais" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="NombrePais" Nullable="false" MaxLength="40" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Negocios2017ModelStoreContainer" CdmEntityContainer="Negocios2017Entities1">
+          <EntitySetMapping Name="tb_clientes">
+            <EntityTypeMapping TypeName="Negocios2017Model.tb_clientes">
+              <MappingFragment StoreEntitySet="tb_clientes">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="NombreCia" ColumnName="NombreCia" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="idpais" ColumnName="idpais" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_paises">
+            <EntityTypeMapping TypeName="Negocios2017Model.tb_paises">
+              <MappingFragment StoreEntitySet="tb_paises">
+                <ScalarProperty Name="Idpais" ColumnName="Idpais" />
+                <ScalarProperty Name="NombrePais" ColumnName="NombrePais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="USP_ACTUALIZAR_CLIENTES" FunctionName="Negocios2017Model.Store.USP_ACTUALIZAR_CLIENTES" />
+          <FunctionImportMapping FunctionImportName="USP_CREAR_CLIENTES" FunctionName="Negocios2017Model.Store.USP_CREAR_CLIENTES" />
+          <FunctionImportMapping FunctionImportName="USP_ELIMINAR_CLIENTES" FunctionName="Negocios2017Model.Store.USP_ELIMINAR_CLIENTES" />
+          <FunctionImportMapping FunctionImportName="USP_LISTAR_CLIENTES" FunctionName="Negocios2017Model.Store.USP_LISTAR_CLIENTES">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Negocios2017Model.USP_LISTAR_CLIENTES_Result">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="NombreCia" ColumnName="NombreCia" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="NombrePais" ColumnName="NombrePais" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_LISTAR_PAIS" FunctionName="Negocios2017Model.Store.USP_LISTAR_PAIS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Negocios2017Model.USP_LISTAR_PAIS_Result">
+                <ScalarProperty Name="Idpais" ColumnName="Idpais" />
+                <ScalarProperty Name="NombrePais" ColumnName="NombrePais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
